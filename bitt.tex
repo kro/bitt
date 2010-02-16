@@ -1,0 +1,473 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{defns}[defn]{Definitions}
+\newtheorem{example}[defn]{Example}
+
+\newtheorem{thm}{Theorem}[section]
+\begin{document}
+\author{Karim Osman}
+\title{Brief Introduction to Topology \\ (working paper)}
+\maketitle
+\tableofcontents
+\section{Introduction}
+This short book started off as a series of notes on the fundamentals of
+topology, a branch in mathematics that studies properties preserved under
+continuous deformations of objects. As the number of notes grew, I felt that a
+more organized set of writings would not only promote my understanding of the
+subject, but also serve as a reference for people that wish to learn the basics
+of topology.
+
+Although, this book aims to be as complete as possible, I strongly recommend
+that the reader follows some other introductory level publication on topology,
+such as Bert Mendelson's Introduction to Topology: Third Edition published by
+Dover Publications, and use the theorems and examples as a reference of how
+profound is one's understanding of the subject; if you do not understand this
+book, you do not understand topology. This said, the emphasize is strongly on
+the presented examples and the remaining writings, such as definitions and
+theorems, are meant to support understanding the examples.
+\section{Basic Set Theory}
+\subsection{Sets}
+\begin{defns}
+A set is a collection of zero or more objects (e.g. numbers, functions,
+vectors, etc.), which are known as elements of a set.
+
+We write $x \in A$ to denote that $x$ is an element of set $A$. If $x$ is not
+an element of $A$, we write $x \notin A$.
+
+If set $A$ is well-defined, then it is known whether an object is or is not an
+element of set $A$.
+
+A set is finite if the cardinality, the number of elements, is finite. The
+cardinality of set $A$ is denoted by $\#A$. A set that is not finite is
+infinite.
+\end{defns}
+
+\begin{defn}
+The empty set is denoted by $\emptyset$ and it is finite. The empty set has no
+elements and its cardinality is zero. If a set has one or more elements, it is
+called $nonempty$.
+\end{defn}
+
+Sets are described by enclosing its elements in braces, where the right side of
+the colon defines the condition for an object to be an element of a set:  $\{ x
+: ...  \}$. A condition such as $x \in \Re$ can be placed on the left side of
+the colon.
+
+\begin{example}
+The set $\{ x \in \Re : x < 2 \}$ is equal to $\{ x : x \in \Re \text{ and } x
+< 2 \}$, and defines a collection of real numbers, in which all elements are
+smaller than 2.
+\end{example}
+
+\begin{example}
+Let $A = \{1, 2, 3, ... \}$. The cardinality of $A$ is undefined, therefore it
+is infinite. However, $A$ is countable as each element can be associated with a
+natural number.
+\end{example}
+
+\begin{defn}
+A set $A$ is said to be a subset of $B$ and is denoted by $A \subset B$, if
+each element in set $A$ is also an element of set $B$.
+\end{defn}
+
+Obviously, $A \subset B$ does not imply that $B \subset A$, however, if the
+latter holds, the sets are equal. Note that it is important not to confuse
+$\in$ and $\subset$. 
+
+\begin{defn}
+If $A$ and $B$ are sets, then $A = B$ if and only if $A \subset B$ and $B
+\subset A$.
+\end{defn}
+
+By the definition of equality of sets, sets $A = \{1, 0\}$ and $B = \{1, 0, 1,
+1\}$ are equal as each element of $A$ is also an element of $B$, and each
+element of $B$ is also an element of $A$. In other words, repetition of
+elements in a definition of a set does not change the set.
+
+\begin{defns} 
+A set $\{a, b\}$ is an unordered pair, whereas $(a, b)$ is an ordered pair.
+
+Ordered pairs $(a, b)$ and $(c, d)$ are equal if and only if $a = c$ and $b =
+d$.
+\end{defns}
+
+\subsection{Basic Operations on Sets}
+\begin{defns}
+Let $A$ and $B$ be sets. If $S = \{ x : x \in A \text{ or } x \in B \}$, then
+$S$ is a union of $A$ and $B$, and we can write $S = A \cup B$.
+
+Let $A_i$ be an indexed family of sets, where $i \in I$. If $S = \{ x : x \in
+A_i \text{ for any } i \in I\}$, then $S$ is a union of sets $A_i$ for all $i
+\in I$, and we can write $S = \bigcup_{i \in I} A_i$.  
+\end{defns}
+
+\begin{defns}
+Let $A$ and $B$ be sets. If $S = \{ x : x \in A \text{ and } x \in B \}$, then
+$S$ is an intersection of $A$ and $B$, and we can write $S = A \cap B$.
+
+Let $A_i$ be an indexed family of sets, where $i \in I$. If $S = \{ x : x \in
+A_i \text{ for all } i \in I\}$, then $S$ is an intersection of sets $A_i$ for
+all $i \in I$, and we can write $S = \bigcap_{i \in I} A_i$.  
+\end{defns}
+
+\begin{defn}
+Let $X$ be a set and $A \subset X$. The complement of $A$ in $X$ is denoted by
+$A^c = X \backslash A$ or $\complement A = X \backslash A$. 
+\end{defn}
+
+\begin{example}
+Let $X$ be a set and $A \subset X$. As $A \subset X$, then $\complement A \in
+X$, while $\complement A \cap A = \emptyset$.
+\end{example}
+
+\begin{example}
+Let $X = \{ x : x \in \mathbb{N} \}$. If $A = \{ x : x \in X \text{ and } x
+\text{ is even} \}$, then $\complement A$ contains only odd natural numbers.
+\end{example}
+
+The following two theorems are known as the De Morgan's laws. These theorems
+relate three basic operations on sets to each other: unions, intersections, and
+complements.
+
+\begin{thm}
+If $X$ is a set and $A_i \subset X$ for all $i \in I$, then $\complement
+\bigcup_{i \in I} A_i = \bigcap_{i \in I} \complement A_i$.
+\begin{proof}
+$x \notin \complement \bigcup_{i \in I} A_i \Leftrightarrow x \in \bigcup_{i
+\in I} A_i \Leftrightarrow x \notin \bigcup_{i \in I} \complement A_i
+\Leftrightarrow x \notin \bigcap_{i \in I} \complement A_i \Rightarrow
+\complement \bigcup_{i \in I} A_i = \bigcap_{i \in I} \complement A_i$
+\end{proof}
+\end{thm}
+
+\begin{thm}
+If $X$ is a set and $A_i \subset X$ for all $i \in I$, then $\complement
+\bigcap_{i \in I} A_i = \bigcup_{i \in I} \complement A_i$.
+\begin{proof}
+$x \notin \complement \bigcap_{i \in I} A_i \Leftrightarrow x \in \bigcap_{i
+\in I} A_i \Leftrightarrow x \in \bigcup_{i \in I} A_i \Leftrightarrow x \notin
+\bigcup_{i \in I} \complement A_i \Rightarrow \complement \bigcap_{i \in I} A_i
+= \bigcup_{i \in I} \complement A_i$
+\end{proof}
+\end{thm}
+
+\begin{defn}
+Let $A$ and $B$ be sets. The Cartesian product of $A$ and $B$ is denoted by $A
+\times B$, and the product, is a set of ordered pairs: $A \times B = \{ (a, b)
+: a \in A \text{ and } b \in B \}$. Consider the Cartesian product $\Re \times
+\Re$, then the set of ordered pairs are coordinates in $\Re^2$.
+\end{defn}
+
+\subsection{Ordered Sets}
+The ordered sets that are of our interest are partially ordered sets and
+totally ordered sets.
+\begin{defn}
+Let $A$ be a partially ordered set and $x$, $y$, and $z$ are elements of $A$.
+An order on set $A$ is a relation, denoted by $\leq$, with the following three
+properties:
+\begin{enumerate}
+\item Reflexivity: $x \leq x$ 
+\item Antisymmetry: if $x \leq y$ and $y \leq x$, then $x = y$
+\item Transitivity: if $x \leq y$ and $y \leq z$, then $x \leq y$
+\end{enumerate}
+\end{defn}
+\begin{defn}
+Let $A$ be a totally ordered set and $x$, $y$, and $z$ are elements of $A$.
+An order on set $A$ is a relation, denoted by $\leq$, with the following three
+properties:
+\begin{enumerate}
+\item Antisymmetry: if $x \leq y$ and $y \leq x$, then $x = y$
+\item Transitivity: if $x \leq y$ and $y \leq z$, then $x \leq y$
+\item Totality: $x \leq y$ or $y \leq x$
+\end{enumerate}
+\end{defn}
+The relation among elements in a set form an order in which the elements are in
+the set, and depending on the properties that the relation among elements in a
+set satisfy, a set is either ordered or unordered.
+
+\begin{defns}
+Let $X$ be a partially ordered set and $A \subset X$. The elements of $X$ that
+are greater than or equal to every element in $A$ are known as the upper bounds
+of set $A$.
+
+Let $X$ be a partially ordered set and $A \subset X$. The elements of $X$ that
+are are smaller than or equal to every element in set $A$ are known as the
+lower bounds of set $A$. 
+\end{defns}
+
+\begin{defn}
+Let $X$ be a partially ordered set, $A \subset X$, and $S$ is the set of upper
+bounds of $A$. The smallest upper bound of $A = \min S$, is the supremum of
+$A$, which is denoted by $\sup A$.
+\end{defn}
+
+Respectively, the properties of the greatest lower bound, infimum, for set $A$
+is obtained by reversing the order of $A$ by multiplying it by $-1$.
+
+\begin{example}
+If $S = \{ x \in \Re : x < 1 \}$, then $\sup S = 1$ and $\max S$, $\min S$, as
+well as $\inf S$ do not exist.
+\end{example}
+
+\begin{example}
+Let $A \subset \Re$ and $A \neq \emptyset$ and assume that $A$ has an upper
+bound. Let $S$ be a nonempty set of upper bounds of $A$, that is, $S = \{ a \in
+\Re : x \leq a \text{ for all } x \in A \}$. As $S$ has a lower bound and per
+the completeness of real numbers, there exists a smallest number in $S$, which
+is the supremum of $A$, or more formally, $\sup A = \min S \in \Re$.  Let's
+show that $\sup A$ is uniquely defined using the properties of partially
+ordered sets. Note that $\Re$ is a partially ordered set (and totally ordered
+set).
+\begin{proof}
+Let $x = \min S$ and $y = \min S$. The relation on $S$ is antisymmetric and
+reflexive: $x \in S$ then $x \leq y$, and $y \in S$ then $y \leq x \Rightarrow
+x = y$.
+\end{proof}
+\end{example}
+
+\begin{example}
+Let's show that if $\max A$ exists then $\sup A = \max A$.
+\begin{proof}
+The relation on $\Re$ is antisymmetric, reflexive, and transitive: $\max A \in
+S$ and $\sup A = \min S$, then $\sup A \leq \max A$, and $\max A \in A$ and
+$\sup A \in S$, then $\max A \leq \sup A \Rightarrow \max A = \sup A$.
+\end{proof}
+\end{example}
+
+\begin{example}
+Let's show that when $\epsilon > 0$ then there exists such $x \in A$ that
+satisfies $x > \sup A - \epsilon$.
+\begin{proof}
+Let's proof by contradiction. That is, $x \leq \sup A - \epsilon$. Recall that
+$S = \{ a \in \Re : x \leq a \text{ for all } x \in A \}$, then $\sup A -
+\epsilon \in S$, because $x \leq a$ and we choose $a = \sup A - \epsilon$. As
+$\sup A - \epsilon \in S$, then $\min S \leq \sup A - \epsilon \Leftrightarrow
+\min S \leq \min S - \epsilon < \min S$, which does not hold as $\min S$ is
+uniquely defined.
+\end{proof}
+\end{example}
+
+\subsection{Functions}
+\begin{defns}
+Let $X$ and $Y$ be sets. The mapping (or function) $f$ from $X$ into $Y$ maps
+each $x \in X$ to exactly one element in $Y$, and we can write $f: X
+\rightarrow Y$. Sets $X$ and $Y$ are known as domain and range, respectively.
+\end{defns}
+One should not confuse function $f$ with an image of $f$ denoted by $f(x)$,
+where $x \in X$.
+\begin{defn}
+Let $f$ be a function. If $f(x) = f(x')$ holds only when $x = x'$, then $f$ is
+injective.
+\end{defn}
+
+\begin{defn}
+Let $f: X \rightarrow Y$. If for all $y \in Y$ there exists such $x \in X$ that
+$y = f(x)$, then $f$ is surjective.
+\end{defn}
+
+\begin{defn}
+If function $f$ is injective and surjective, then $f$ is bijective.
+\end{defn}
+
+\begin{defn}
+Let $f: X \rightarrow Y$. The inverse function for $f$, denoted by $f^{-1}$, is
+a mapping from $Y$ onto $X$, or $f^{-1}: Y \rightarrow X$.
+\end{defn}
+
+\begin{defn}
+Let $f: X \rightarrow Y$ and $g: Y \rightarrow Z$. The composite function of
+$f$ and $g$ is denoted by $f \circ g$, and the image of the composite function
+$f \circ g$ is denoted by $(f \circ g)(x) = f(g(x))$.
+\end{defn}
+
+
+\begin{thm}
+Let $f: X \rightarrow Y$. An inverse function $f^{-1}$ exists if and only if
+$f$ is a bijection. 
+\begin{proof}
+Let's proof by contradiction. Let $f: X \rightarrow Y$.
+
+\begin{enumerate}
+\item Injective: Assume that $f^{-1}: Y \rightarrow X$ exists. If $x \neq x'$
+and $y = f(x) = f(x')$, then $f^{-1}(y) = x'$ or $f^{-1}(y) = x$, which is in
+contradiction with the definition of a function, and therefore $f^{-1}$ does
+not exist.
+
+\item Surjective: Assume that $f^{-1}: Y \rightarrow X$ exists. If $y \in Y$
+and $y = f(x)$ does not hold for any $x \in X$, then $f^{-1}(y) \notin X$,
+which is in contradiction with the definition of a function, and therefore
+$f^{-1}$ does not exist.
+\end{enumerate}
+From (1) and (2) it follows that $f^{-1}$ exists if and only if $f$ is
+bijective.
+\end{proof}
+\end{thm}
+
+\begin{defn}
+A function that maps each element to itself is an identity function, or $f: X
+\rightarrow X$ for all $x \in X$, is usually denoted by $id_X$. Let $g: X
+\rightarrow Y$ be bijective, then we write $g \circ g^{-1} = id_Y$ and $g^{-1}
+\circ g = id_X$.
+\end{defn}
+
+\begin{thm}
+If $f: X \rightarrow Y$, $g: Y \rightarrow X$, $f \circ g = id_Y$ and $g \circ
+y = id_X$, then $f$ and $g$ are bijections and $f = g^{-1}$.
+\begin{proof}
+Let's show that $f$ is injective and surjective, and therefore bijective (the
+proof that $g$ is bijective is similar):
+\begin{enumerate}
+\item Injectivity: Let $x_1 \in X$, $x_2 \in X$, and $x_1 \neq x_2$. By the
+definition of a function (for each $y \in Y$ there exists exactly one $x \in
+X$), if $g(f(x_1)) \neq g(f(x_2))$, then $f(x_1) \neq f(x_2)$.
+\item Surjectivity: Let $y \in Y$. As $g(y) \in X$ and $f(g(y)) \in Y$, then
+for all $x \in X$ there exists $f(x) = y$.
+\end{enumerate}
+We know that $f^{-1} \circ f = id_X$ and $f \circ g = id_Y$, so $g = id_X \circ
+g \Leftrightarrow g = f^{-1} \circ f \circ g \Leftrightarrow g = f^{-1} \circ
+id_Y \Leftrightarrow g = f^{-1}$.
+\end{proof}
+\end{thm}
+
+\begin{thm}
+If $f: X \rightarrow Y$ is a bijection, then $f^{-1}: Y \rightarrow X$ is a
+bijection, and $(f^{-1})^{-1} = f$.
+\begin{proof}
+Let's show that $f^{-1}$ is injective and surjective, and therefore bijective:
+\begin{enumerate}
+\item Injectivity: Let $y_1 \in Y$, $y_2 \in Y$, and $y_1 \neq y_2$. If
+$f^{-1}$ is not injective, then by injectivity of $f$, $f^{-1}(y_1) =
+f^{-1}(y_2) \Leftrightarrow f(f^{-1}(y_1)) = f(f^{-1}(y_2)) \Leftrightarrow y_1
+= y_2$, which does not hold.
+\item Surjectivity: If $f^{-1}$ is not surjective, then for $x \in X$ there
+does not exist such $y \in Y$ that $x = f^{-1}(y) \Leftrightarrow f(x) =
+f(f^{-1}(y)) \Leftrightarrow y = f(x)$, which does not hold, as $f$ is
+surjective.
+\end{enumerate}
+From (1) and (2) it follows that $f^{-1}$ is a bijection. 
+
+Let $g = f^{-1}$. As $id_X = g \circ g^{-1}$ and $id_Y = f \circ f^{-1} = f
+\circ g$, then $f = id_Y \circ f = f \circ g \circ f = f \circ id_X = f \circ
+f^{-1} \circ (f^{-1})^{-1} = id_Y \circ (f^{-1})^{-1} = (f^{-1})^{-1}$.
+\end{proof}
+\end{thm}
+\section{Inner Product Spaces and Normed Spaces}
+\subsection{Euclidean Space and Vector Space}
+\begin{defns}
+Let $x$ and $y$ be vectors in an Euclidean space $\Re^n$. The inner product (or
+the dot product) of $x$ and $y$ is $x \cdot y = \sum^n_{i=1} x_i y_i$. The norm
+of $x$ is $ ||x|| = \sqrt{x \cdot x}$.
+\end{defns}
+Choosing these two basic properties of an Euclidean space as axioms, the
+concept of an inner product space and normed vector space can be defined.
+\begin{defn}
+A vector space $E$ is a set of vectors given that:
+\begin{enumerate}
+\item for each pair of vectors $x \in E$ and $y \in E$, the sum $x + y \in E$
+\item for each vector $x$ and real number $a$, the product $a x \in E$
+\end{enumerate}
+which are subject to the following axioms for all vectors $x, y, z$ and $a, b
+\in \Re$:
+\begin{enumerate}
+\item Associativity of addition: $(x + y) + z = x + (y + z)$.
+\item Commutativity of addition: $(x + y) = (y + x)$.
+\item Identity element of addition: there exists an element $0 \in E$ (zero
+vector) such that $0 + x = x$.
+\item Inverse element of addition: for each $x \in E$ there exists $-x \in E$
+such that $x + (-x) = 0$.
+\item Distributivity of scalar multiplication: $a (x + y) = ax + ay$, $(a + b)x
+= ax + bx$.
+\item Comptatibility of scalar multiplication: $(ab)x = a(bx)$.
+\item Identity element of scalar multiplication: $1 x = x$.
+\end{enumerate}
+\end{defn}
+\subsection{Inner Product Space}
+\begin{defns}
+Let $E$ be a vector space. Image $(x, y) \rightarrow x \cdot y: E \times E
+\rightarrow R$ is an inner product in $E$ if for all $x,y,z \in E$ and $a \in
+R$:
+\begin{enumerate}
+\item $x \cdot y = y \cdot x$
+\item $(ax) \cdot y = a (x \cdot y)$
+\item $(x + y) \cdot z = x \cdot z + y \cdot z$
+\item $x \cdot x \geq 0$
+\item $x \cdot x = 0 \Leftrightarrow x = 0$
+\end{enumerate}
+A vector space for which an inner product is defined is also an inner product
+space.
+\end{defns}
+\begin{example}
+Let's proof that $\Re^n$ is an inner product space by showing that each of the
+aformentioned properties hold for $\Re^n$.
+\begin{proof}
+Let $x = (x_1,...,x_n), y = (y_1,...,y_n), z = (z_1,...,z_n) \in \Re^n$ and $a
+\in \Re$.
+\begin{enumerate}
+\item As $x_i y_i = y_i x_i$: $x \cdot y = \sum_{i = 1}^{n}(x_i y_i) = \sum_{i
+= 1}^n (y_i x_i) = y \cdot x$
+\item As $(a x_1,...,a x_n) = ax$: $(ax) \cdot y = \sum_{i=1}^n (a x_i) y_i = a
+\sum_{i=1}^n (x_i y_i) = a (x \cdot y)$
+\item As $x + y = (x_1 + y_1,...,x_n + y_n)$: $(x + y) \cdot z = \sum_{i=1}^n
+(x_i + y_i) z_i = \sum_{i=1}^n (x_i z_i + y_i z_i) = \sum_{i=1}^n x_i z_i +
+\sum_{i=1}^n y_i z_i = x \cdot z + y \cdot z$
+\item As $x_i^2 = x_i x_i \geq 0$ for all $i \in I = \{1,...,n\}$: $x \cdot x =
+\sum_{i=1}^n x_i x_i \geq 0$
+\item As $x_i x_i = 0 \Rightarrow x_i = 0$ for all $i \in I = \{1,...,n\}$: $x
+\cdot x = \sum_{i=1}^n x_i x_i \Rightarrow \sum_{i=1}^n x_i = x = 0$
+\end{enumerate}
+\end{proof}
+\end{example}
+\subsection{Normed Vector Space}
+
+\section{Metric Spaces}
+
+[ TODO: Write it. ]
+
+\section{Open Sets}
+
+[ TODO: Write it. ]
+
+\section{Closed Sets}
+
+[ TODO: Write it. ]
+
+\section{Continuous Functions}
+
+[ TODO: Write it. ]
+
+\section{Subspace Topology}
+
+[ TODO: Write it. ]
+
+\begin{thebibliography}{9}
+\bibitem{schecter97}
+  Eric Schecter,
+  \emph{Handbook of Analysis and Its Foundations}.
+  Academic Press, New York,
+  1997.
+\bibitem{gamelin99}
+  Theodore W. Gamelin, Robert Everist Greene,
+  \emph{Introduction to Topology}.
+  Dover Publications, New York,
+  Second Edition,
+  1999.
+\bibitem{mendelsonXX}
+  Bert Medelson,
+  \emph{Introduction to Topology}.
+  Dover Publications, New York,
+  Third Edition,
+  1990.
+\bibitem{rudin76}
+  Walter Rudin,
+  \emph{Principles of Mathematical Analysis}
+  McGraw-Hill Science/Engineering/Math, 
+  Third Edition,
+  1976.
+\end{thebibliography}
+\end{document}
